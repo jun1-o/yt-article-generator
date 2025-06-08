@@ -26,6 +26,16 @@ def main():
     parser.add_argument('--url', required=True, help='YouTube video URL')
     parser.add_argument('--topic', required=True, help='Research topic for Wikipedia')
     parser.add_argument('--out', help='File path to save the generated article')
+    parser.add_argument(
+        '--skip-summary',
+        action='store_true',
+        help='Skip the summarization step and use raw transcript',
+    )
+    parser.add_argument(
+        '--skip-research',
+        action='store_true',
+        help='Skip the Wikipedia research step',
+    )
     args = parser.parse_args()
 
     video_id = extract_video_id(args.url)
@@ -34,10 +44,16 @@ def main():
     transcript = get_transcript(video_id)
     print(f"[📜 Transcript] {transcript[:100]}...")
 
-    summary = summarize_text(transcript)
+    if args.skip_summary:
+        summary = transcript
+    else:
+        summary = summarize_text(transcript)
     print(f"[📝 Summary] {summary[:100]}...")
 
-    context = get_wikipedia_info(args.topic)
+    if args.skip_research:
+        context = ""
+    else:
+        context = get_wikipedia_info(args.topic)
     print(f"[🔍 Wikipedia] {context[:100]}...")
 
     article = generate_article(args.topic, summary, context)

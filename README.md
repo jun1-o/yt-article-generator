@@ -8,6 +8,7 @@ Perfect for blog writers, note creators, and SEO-focused content generation.
 - Summarize with OpenAI GPT
 - Research related terms via Wikipedia
 - Auto-generate articles in note-style format
+- Optional flags to skip summarization or research
 
 ## 📦 Install
 
@@ -29,4 +30,11 @@ If the `OPENAI_API_KEY` variable is unset, the script falls back to a short summ
 ```bash
 unset OPENAI_API_KEY
 python main.py --url <YouTube_URL> --topic "AI教育"
+```
+
+You can also skip specific steps when running the tool:
+
+```bash
+python main.py --url <YouTube_URL> --topic "AI教育" --skip-summary   # skip summarization
+python main.py --url <YouTube_URL> --topic "AI教育" --skip-research  # skip Wikipedia lookup
 ```
