@@ -18,5 +18,5 @@ pip install -r requirements.txt
 ## 🚀 Usage
 
 ```bash
-python main.py --url <YouTube_URL> --topic "AI教育"
+python main.py --url <YouTube_URL> --topic "AI教育" --out article.txt
 ```
