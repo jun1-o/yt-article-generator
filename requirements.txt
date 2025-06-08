@@ -1,0 +1,5 @@
+youtube-transcript-api
+openai
+python-dotenv
+pyyaml
+wikipedia
