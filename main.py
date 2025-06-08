@@ -25,6 +25,7 @@ def main():
     parser = argparse.ArgumentParser(description='Generate note-style article from YouTube')
     parser.add_argument('--url', required=True, help='YouTube video URL')
     parser.add_argument('--topic', required=True, help='Research topic for Wikipedia')
+    parser.add_argument('--out', help='File path to save the generated article')
     args = parser.parse_args()
 
     video_id = extract_video_id(args.url)
@@ -41,6 +42,14 @@ def main():
 
     article = generate_article(args.topic, summary, context)
     print("\n[📄 最終記事]\n", article)
+
+    if args.out:
+        try:
+            with open(args.out, "w", encoding="utf-8") as f:
+                f.write(article)
+            print(f"[💾 Saved] Article written to {args.out}")
+        except OSError as e:
+            print(f"[⚠️ Save failed] {e}")
 
 
 if __name__ == '__main__':
