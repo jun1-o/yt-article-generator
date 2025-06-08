@@ -28,11 +28,19 @@ def main():
     args = parser.parse_args()
 
     video_id = extract_video_id(args.url)
+    print(f"[🎥 Video ID] {video_id}")
+
     transcript = get_transcript(video_id)
+    print(f"[📜 Transcript] {transcript[:100]}...")
+
     summary = summarize_text(transcript)
+    print(f"[📝 Summary] {summary[:100]}...")
+
     context = get_wikipedia_info(args.topic)
+    print(f"[🔍 Wikipedia] {context[:100]}...")
+
     article = generate_article(args.topic, summary, context)
-    print(article)
+    print("\n[📄 最終記事]\n", article)
 
 
 if __name__ == '__main__':
