@@ -17,6 +17,16 @@ pip install -r requirements.txt
 
 ## 🚀 Usage
 
+First set your OpenAI API key to enable GPT summarization:
+
 ```bash
+export OPENAI_API_KEY=your-key
 python main.py --url <YouTube_URL> --topic "AI教育" --out article.txt
+```
+
+If the `OPENAI_API_KEY` variable is unset, the script falls back to a short summary:
+
+```bash
+unset OPENAI_API_KEY
+python main.py --url <YouTube_URL> --topic "AI教育"
 ```
