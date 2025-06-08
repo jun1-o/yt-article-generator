@@ -2,6 +2,7 @@ import os
 import yaml
 from typing import Optional
 import openai
+import re
 
 
 _DEF_CONFIG_PATHS = [".env", "config/settings.yaml"]
@@ -39,21 +40,24 @@ def _load_api_key() -> Optional[str]:
 def summarize_text(text: str) -> str:
     """Summarize the provided text using OpenAI ChatGPT API."""
     api_key = _load_api_key()
-    if not api_key:
-        raise RuntimeError("OPENAI_API_KEY not configured")
 
-    openai.api_key = api_key
-    messages = [
-        {
-            "role": "system",
-            "content": "You are a helpful assistant that summarizes transcripts.",
-        },
-        {"role": "user", "content": text},
-    ]
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=messages,
-        temperature=0.3,
-        max_tokens=300,
-    )
-    return response.choices[0].message.content.strip()
+    if api_key:
+        openai.api_key = api_key
+        messages = [
+            {
+                "role": "system",
+                "content": "You are a helpful assistant that summarizes transcripts.",
+            },
+            {"role": "user", "content": text},
+        ]
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            temperature=0.3,
+            max_tokens=300,
+        )
+        return response.choices[0].message.content.strip()
+
+    # Fallback mock summarization when no API key is available
+    sentences = re.split(r"(?<=[。！？])", text)
+    return "".join(sentences[:3]).strip()

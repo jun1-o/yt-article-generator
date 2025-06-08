@@ -1,13 +1,16 @@
 
 def generate_article(title: str, summary: str, context: str) -> str:
-    """Return article text in a simple note-like format."""
+    """Return article text formatted for note."""
     parts = [
-        f"# {title}",
-        "\n## Summary",
+        f"# タイトル：{title}",
+        "",
+        "## \U0001F4CC 要約ポイント（3行で）",
         summary,
-        "\n## Additional Context",
+        "",
+        "## \U0001F9E0 詳細解説と補足知識",
         context,
-        "\n## Thoughts",
-        "Thank you for reading!",
+        "",
+        "## \u2728 まとめと感想",
+        "（あとで追記可）",
     ]
-    return "\n\n".join(parts)
+    return "\n".join(parts)
