@@ -22,8 +22,9 @@ def fix_typo(text: str) -> str:
 def get_transcript(video_id: str) -> str:
     """Fetch transcript text for a given YouTube video ID and clean it."""
     try:
-        transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=["ja", "en"])
-        text = " ".join(item["text"] for item in transcript)
+        api = YouTubeTranscriptApi()
+        fetched = api.fetch(video_id, languages=["ja", "en"])
+        text = " ".join(snippet.text for snippet in fetched.snippets)
         return fix_typo(text)
     except (
         TranscriptsDisabled,
