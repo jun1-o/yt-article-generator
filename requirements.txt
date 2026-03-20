@@ -3,3 +3,7 @@ openai
 python-dotenv
 pyyaml
 wikipedia
+pandas
+xgboost
+numpy
+scikit-learn
