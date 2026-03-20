@@ -1,5 +1,9 @@
 from youtube_transcript_api import YouTubeTranscriptApi
-from youtube_transcript_api._errors import TranscriptsDisabled, NoTranscriptFound, CouldNotRetrieveTranscript
+from youtube_transcript_api._errors import (
+    TranscriptsDisabled,
+    NoTranscriptFound,
+    CouldNotRetrieveTranscript,
+)
 import requests
 import logging
 import re
