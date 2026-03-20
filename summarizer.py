@@ -1,6 +1,6 @@
 import os
 import logging
-import openai
+from openai import OpenAI
 import re
 
 
@@ -10,7 +10,7 @@ def summarize_text(text: str) -> str:
 
     if api_key:
         try:
-            openai.api_key = api_key
+            client = OpenAI(api_key=api_key)
             messages = [
                 {
                     "role": "system",
@@ -18,7 +18,7 @@ def summarize_text(text: str) -> str:
                 },
                 {"role": "user", "content": text},
             ]
-            response = openai.ChatCompletion.create(
+            response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=messages,
                 temperature=0.3,
